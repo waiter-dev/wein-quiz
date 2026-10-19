@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#2f6b4a">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Weinquiz Okt 26">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)} [hidden]{display:none!important} img{max-width:100%}</style>
+<title>Plachutta Weinquiz Oktober 2026</title>
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+/* Layout: one-screen phone quiz; header band, question card, answer stack, footer stats. Sage paper like the menu card. */
+:root{
+  --bg:#eef3ec; --paper:#f7faf5; --fg:#1d3328; --muted:#5d7066; --line:#cfdccf;
+  --accent:#2f6b4a; --accent-fg:#ffffff; --red:#7a2a3a; --ok:#2f6b4a; --bad:#9a3b3b; --ok-bg:#dcebdc; --bad-bg:#f1dada;
+  --display:"Jost","Futura","Avenir Next",system-ui,sans-serif;
+  --body:"IBM Plex Sans",system-ui,-apple-system,sans-serif;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0f1a14; --paper:#172620; --fg:#e4ece6; --muted:#9bb0a3; --line:#2b3f34;
+  --accent:#6fb58c; --accent-fg:#0f1a14; --red:#d98a97; --ok:#7fc49a; --bad:#e08a8a; --ok-bg:#1f3b2b; --bad-bg:#3f2222; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0f1a14; --paper:#172620; --fg:#e4ece6; --muted:#9bb0a3; --line:#2b3f34;
+  --accent:#6fb58c; --accent-fg:#0f1a14; --red:#d98a97; --ok:#7fc49a; --bad:#e08a8a; --ok-bg:#1f3b2b; --bad-bg:#3f2222; color-scheme:dark }
+
+*{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--body);font-size:16px;line-height:1.45;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:12px 20px}
+.wrap{max-width:560px;margin:0 auto;display:flex;flex-direction:column;gap:14px;min-height:100%}
+h1{font-family:var(--display);font-weight:600;letter-spacing:.14em;text-transform:uppercase;font-size:1.05rem;margin:0;text-align:center;color:var(--accent)}
+.sub{text-align:center;color:var(--muted);font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;margin:0}
+.tabs{display:flex;gap:6px;background:var(--paper);border:1px solid var(--line);border-radius:999px;padding:4px}
+.tabs button{flex:1;border:0;background:transparent;color:var(--muted);font:500 .85rem var(--display);letter-spacing:.06em;text-transform:uppercase;padding:8px 4px;border-radius:999px;cursor:pointer}
+.tabs button[aria-selected="true"]{background:var(--accent);color:var(--accent-fg)}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chips label{border:1px solid var(--line);border-radius:999px;padding:5px 11px;font-size:.8rem;cursor:pointer;background:var(--paper);display:flex;align-items:center;gap:6px}
+.chips input{margin:0;accent-color:var(--accent)}
+.chips label:has(input:checked){border-color:var(--accent);color:var(--accent);font-weight:500}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:18px 16px;display:flex;flex-direction:column;gap:12px}
+.kicker{font-family:var(--display);font-size:.75rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);display:flex;justify-content:space-between;gap:8px}
+.kicker .cat{color:var(--accent)} .kicker .cat.rot{color:var(--red)}
+.q{font-family:var(--display);font-size:1.25rem;font-weight:500;line-height:1.3;margin:0;text-wrap:balance}
+.q b{font-weight:600}
+.ans{display:flex;flex-direction:column;gap:8px}
+.ans button{text-align:left;border:1px solid var(--line);background:var(--bg);color:var(--fg);border-radius:10px;padding:12px 14px;font:inherit;font-size:.98rem;cursor:pointer;font-variant-numeric:tabular-nums;min-height:46px}
+.ans button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.ans button.ok{background:var(--ok-bg);border-color:var(--ok);color:var(--ok);font-weight:600}
+.ans button.bad{background:var(--bad-bg);border-color:var(--bad);color:var(--bad)}
+.ans button:disabled{cursor:default}
+.fb{font-size:.9rem;color:var(--muted);min-height:1.3em}
+.fb strong{color:var(--fg)}
+.row{display:flex;gap:8px;flex-wrap:wrap}
+.btn{border:0;background:var(--accent);color:var(--accent-fg);font:500 .9rem var(--display);letter-spacing:.08em;text-transform:uppercase;padding:12px 18px;border-radius:10px;cursor:pointer;flex:1}
+.btn.ghost{background:transparent;color:var(--accent);border:1px solid var(--accent)}
+.btn:focus-visible{outline:2px solid var(--fg);outline-offset:2px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.stat{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:8px 10px;text-align:center}
+.stat b{display:block;font-family:var(--display);font-size:1.3rem;font-variant-numeric:tabular-nums}
+.stat span{font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+/* Lernen */
+.list{display:flex;flex-direction:column;gap:6px}
+.sec{font-family:var(--display);letter-spacing:.14em;text-transform:uppercase;font-size:.78rem;color:var(--muted);margin:10px 0 2px;display:flex;justify-content:space-between}
+.item{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:10px 12px;display:grid;grid-template-columns:1fr auto;gap:2px 10px;font-size:.92rem}
+.item .n{font-weight:600;font-family:var(--display);letter-spacing:.02em}
+.item .n small{font-weight:400;color:var(--muted);font-family:var(--body);margin-left:6px}
+.item .p{font-variant-numeric:tabular-nums;text-align:right;font-weight:500;white-space:nowrap}
+.item .w{grid-column:1/-1;color:var(--muted);font-size:.85rem}
+.item.hide .w,.item.hide .p{filter:blur(6px);cursor:pointer}
+.item.hide .w:active,.item.hide .p:active{filter:none}
+.flash{text-align:center;padding:28px 16px;min-height:200px;justify-content:center}
+.flash .big{font-family:var(--display);font-size:1.4rem;font-weight:600}
+.flash .detail{color:var(--muted)}
+.flash .detail .pr{color:var(--fg);font-weight:600;font-variant-numeric:tabular-nums}
+.note{font-size:.78rem;color:var(--muted);text-align:center;margin:0}
+@media (prefers-reduced-motion:no-preference){.ans button{transition:background .15s,border-color .15s}}
+</style>
+</head><body>
+
+<div class="wrap">
+  <div>
+    <h1>Weinquiz · Oktober 2026</h1>
+    <p class="sub">Plachutta Neuer Markt · Weinkarte Stand Oktober 2026</p>
+  </div>
+
+  <div class="tabs" role="tablist">
+    <button role="tab" aria-selected="true" data-tab="quiz" id="tab-quiz">Quiz</button>
+    <button role="tab" aria-selected="false" data-tab="flash" id="tab-flash">Karten</button>
+    <button role="tab" aria-selected="false" data-tab="list" id="tab-list">Karte</button>
+  </div>
+
+  <!-- QUIZ -->
+  <section id="view-quiz">
+    <div class="chips" id="catChips">
+      <label><input type="checkbox" id="cat-weiss" checked> Weiß &amp; Rosé</label>
+      <label><input type="checkbox" id="cat-rot" checked> Rot</label>
+      <label><input type="checkbox" id="cat-schnaps" checked> Schnäpse</label>
+    </div>
+    <div class="chips" id="typeChips" style="margin-top:6px">
+      <label><input type="checkbox" id="t-winzer" checked> Weingut</label>
+      <label><input type="checkbox" id="t-jahrgang" checked> Jahrgang</label>
+      <label><input type="checkbox" id="t-name" checked> Weinname</label>
+      <label><input type="checkbox" id="t-reverse" checked> Umgekehrt</label>
+      <label><input type="checkbox" id="t-herkunft"> Herkunft</label>
+    </div>
+
+    <div class="card" style="margin-top:12px">
+      <div class="kicker"><span class="cat" id="qCat">Weiß</span><span id="qType">Winzer</span></div>
+      <p class="q" id="qText">…</p>
+      <div class="ans" id="answers"></div>
+      <div class="fb" id="fb"></div>
+      <div class="row">
+        <button class="btn" id="nextBtn">Nächste Frage</button>
+      </div>
+    </div>
+
+    <div class="stats" style="margin-top:12px">
+      <div class="stat"><b id="sCorrect">0</b><span>Richtig</span></div>
+      <div class="stat"><b id="sTotal">0</b><span>Gesamt</span></div>
+      <div class="stat"><b id="sStreak">0</b><span>Serie</span></div>
+    </div>
+    <div class="row" style="margin-top:8px">
+      <button class="btn ghost" id="resetBtn">Statistik zurücksetzen</button>
+    </div>
+  </section>
+
+  <!-- FLASHCARDS -->
+  <section id="view-flash" hidden>
+    <div class="card flash" id="flashCard">
+      <div class="kicker" style="justify-content:center"><span id="fCat" class="cat">Weiß</span></div>
+      <div class="big" id="fName">…</div>
+      <div class="detail" id="fDetail" hidden></div>
+      <p class="note" id="fHint">Tippen zum Aufdecken</p>
+    </div>
+    <div class="row" style="margin-top:12px">
+      <button class="btn ghost" id="fPrev">Zurück</button>
+      <button class="btn" id="fNext">Weiter</button>
+    </div>
+  </section>
+
+  <!-- LIST -->
+  <section id="view-list" hidden>
+    <div class="chips"><label><input type="checkbox" id="hideDetails"> Details verdecken (zum Abdecken antippen)</label></div>
+    <div class="list" id="listBox"></div>
+    <p class="note" style="margin-top:10px">Preise in € · 1/8 L / 0,75 L · wie auf der Karte abgeschrieben</p>
+  </section>
+</div>
+
+<script>
+// ---- Daten (von der Karte) ----
+// n = voller Name, s = Sorte/Grundname, z = Zusatzname (für „Wie heißt…“-Fragen), t = eindeutige Beschreibung für die Frage
+const WINES = [
+ // Weiß & Rosé
+ {c:'weiss',n:'Grüner Veltliner Schankwein',s:'Grüner Veltliner',t:'Hauswein (Grüner Veltliner, offen)',w:'Taubenschuss',r:null,y:null,a:null,g:6.1,b:null},
+ {c:'weiss',n:'Grüner Veltliner „Am Berg“',s:'Grüner Veltliner',z:'„Am Berg“',t:'günstige Grüne Veltliner flaschenweise',w:'Bernhard Ott',r:'Wagram, Niederösterreich',y:2025,a:12.0,g:null,b:52.0},
+ {c:'weiss',n:'Sauvignon Blanc Jakobi',s:'Sauvignon Blanc',z:'Jakobi',t:'offene (günstige) Sauvignon Blanc',w:'Gross & Gross',r:'Südsteiermark DAC',y:2025,a:12.5,g:8.2,b:47.0},
+ {c:'weiss',n:'Wiener Gemischter Satz',s:'Wiener Gemischter Satz',t:'Wiener Gemischte Satz',w:'Stift Klosterneuburg',r:'Wien',y:2025,a:12.5,g:7.9,b:45.0},
+ {c:'weiss',n:'Chardonnay',s:'Chardonnay',t:'Chardonnay',w:'Grassl',r:'Carnuntum DAC',y:2025,a:12.5,g:null,b:46.0,bio:1},
+ {c:'weiss',n:'Riesling',s:'Riesling',t:'Riesling',w:'Loimer',r:'Langenlois, Kamptal DAC',y:2025,a:12.5,g:8.2,b:47.0,bio:1},
+ {c:'weiss',n:'Pinot Grigio Merus',s:'Pinot Grigio',z:'Merus',t:'Pinot Grigio',w:'Tiefenbrunner',r:'Kurtatsch, Südtirol',y:2025,a:13.5,g:8.4,b:48.0},
+ {c:'weiss',n:'Plachutta Rosé',s:'Rosé',t:'Plachutta Rosé',w:'Hannes Sabathi',r:'Gamlitz, Südsteiermark',y:2025,a:11.0,g:7.6,b:44.0},
+ {c:'weiss',n:'Sauvignon Blanc Ried Grassnitzberg',s:'Sauvignon Blanc',z:'Ried Grassnitzberg',t:'teure Sauvignon Blanc (nur flaschenweise)',w:'Tement',r:'Langenlois, Kamptal DAC',y:2022,a:13.0,g:null,b:83.0,bio:1},
+ {c:'weiss',n:'Grüner Veltliner Smaragd',s:'Grüner Veltliner',z:'Smaragd',t:'teure Grüne Veltliner (Smaragd, nur flaschenweise)',w:'Nikolaihof',r:'Ried im Weingebirge, Niederösterreich',y:2020,a:13.0,g:null,b:87.0,bio:1},
+ // Rot
+ {c:'rot',n:'Blaufränkisch Classic',s:'Blaufränkisch',z:'Classic',t:'Blaufränkisch',w:'Hans Igler',r:'Deutschkreutz, Mittelburgenland',y:2023,a:13.0,g:8.5,b:49.0},
+ {c:'rot',n:'Zweigelt Kieselstein',s:'Zweigelt',z:'Kieselstein',t:'offene (günstige) Zweigelt',w:'Claus Preisinger',r:'Gols, Neusiedlersee',y:2023,a:12.5,g:8.7,b:50.0,bio:1},
+ {c:'rot',n:'Pinot Noir',s:'Pinot Noir',t:'offene (günstige) Pinot Noir',w:'Reinisch',r:'Tattendorf, Thermenregion',y:2023,a:13.0,g:8.7,b:50.0,bio:1},
+ {c:'rot',n:'Cabernet Sauvignon',s:'Cabernet Sauvignon',t:'Cabernet Sauvignon',w:'Martin Pasler',r:'Burgenland',y:2022,a:13.5,g:9.3,b:53.0,bio:1},
+ {c:'rot',n:'Heideboden (BF, ME, ZW)',s:'Cuvée',z:'Heideboden',t:'Heideboden (Cuvée BF, ME, ZW)',w:'H&A Nittnaus',r:'Gols, Neusiedlersee',y:2023,a:13.5,g:9.1,b:52.0},
+ {c:'rot',n:'Merlot',s:'Merlot',t:'Merlot',w:'G&R Triebaumer',r:'Rust, Leithaberg',y:2024,a:14.0,g:null,b:53.0,bio:1},
+ {c:'rot',n:'Rarität Pannobile',s:'Rarität',z:'Pannobile',t:'Rarität Pannobile',w:'G&H Heinrich',r:'Neusiedlersee, Burgenland',y:2015,a:13.0,g:null,b:85.0},
+ {c:'rot',n:'Pinot Noir Reserve',s:'Pinot Noir',z:'Reserve',t:'teure Pinot Noir (Reserve, nur flaschenweise)',w:'Juris',r:'Neusiedlersee, Burgenland',y:2020,a:14.0,g:null,b:87.0},
+ {c:'rot',n:'Zweigelt Ried Hallebühl',s:'Zweigelt',z:'Ried Hallebühl',t:'teure Zweigelt (nur flaschenweise)',w:'Umathum',r:'Frauenkirchen, Burgenland',y:2020,a:12.5,g:null,b:95.0},
+ // Schnäpse (g = Preis)
+ {c:'schnaps',n:'Marille',w:'Wallner',g:6.9},
+ {c:'schnaps',n:'Himbeere',w:'Wieser',g:7.4},
+ {c:'schnaps',n:'Vogelbeere',w:'Gänserndorf',g:7.3},
+ {c:'schnaps',n:'Alte Zwetschke',w:'Gölles',g:7.4},
+ {c:'schnaps',n:'Haselnuss',w:'Freihof',g:6.9},
+ {c:'schnaps',n:'Williamsbirne',w:'Jöbstl',g:7.3},
+];
+const CATNAME={weiss:'Weiß & Rosé',rot:'Rot',schnaps:'Schnaps'};
+const eur=v=>v.toFixed(1).replace('.',',')+' €';
+const fullName=w=>w.c==='schnaps'?`${w.n} (${w.w})`:w.n+(w.y?' '+w.y:'');
+const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+const pick=a=>a[Math.floor(Math.random()*a.length)];
+const $=id=>document.getElementById(id);
+
+// ---- Stats (localStorage, best effort) ----
+let stats={c:0,t:0,s:0};
+try{const s=JSON.parse(localStorage.getItem('wq-stats'));if(s)stats=s}catch(e){}
+function saveStats(){try{localStorage.setItem('wq-stats',JSON.stringify(stats))}catch(e){}
+  $('sCorrect').textContent=stats.c;$('sTotal').textContent=stats.t;$('sStreak').textContent=stats.s}
+saveStats();
+$('resetBtn').onclick=()=>{stats={c:0,t:0,s:0};saveStats()};
+
+// ---- Fragen ----
+function distractors(correct,pool,n=3){
+  const set=new Set([String(correct)]);const out=[];
+  for(const v of shuffle(pool)){const k=String(v);if(!set.has(k)){set.add(k);out.push(v);if(out.length>=n)break}}
+  return out;
+}
+function makeQuestion(){
+  const cats=['weiss','rot','schnaps'].filter(c=>$('cat-'+c).checked);
+  const types=['winzer','jahrgang','name','reverse','herkunft'].filter(t=>$('t-'+t).checked);
+  if(!cats.length||!types.length)return null;
+  const pool=WINES.filter(w=>cats.includes(w.c));
+  // Volle Antwortzeile: Name, Jahrgang, % – Winzer, Ort
+  const full=w=>w.c==='schnaps'?`${w.n} – ${w.w}`:
+    `${w.n}${w.y?' '+w.y:''}${w.a?', '+String(w.a).replace('.',',')+' %':''}${w.bio?' BIO':''} – ${w.w}${w.r?', '+w.r:''}`;
+  for(let tries=0;tries<60;tries++){
+    const w=pick(pool);const t=pick(types);
+    const same=WINES.filter(x=>x.c===w.c&&x!==w);
+    let q=null;
+    if(t==='winzer'&&w.w){
+      q={type:w.c==='schnaps'?'Brennerei':'Weingut',
+         text:w.c==='schnaps'?`Von wem ist der <b>${w.n}</b>-Schnaps?`:`Von wem ist der <b>${w.t}</b>?`,
+         correct:w.w,opts:distractors(w.w,WINES.filter(x=>x.c===w.c).map(x=>x.w)),info:full(w)};
+    } else if(t==='herkunft'&&w.r){
+      q={type:'Herkunft',text:`Woher kommt der <b>${w.t}</b> von ${w.w}?`,
+         correct:w.r,opts:distractors(w.r,WINES.filter(x=>x.r).map(x=>x.r)),info:full(w)};
+    } else if(t==='jahrgang'&&w.y){
+      q={type:'Jahrgang',text:`Welchen Jahrgang hat der <b>${w.n}</b> von ${w.w}?`,
+         correct:String(w.y),opts:distractors(String(w.y),WINES.filter(x=>x.y).map(x=>String(x.y))),info:full(w)};
+    } else if(t==='name'&&w.z){
+      q={type:'Weinname',text:`Wie heißt der <b>${w.s}</b> von ${w.w}?`,
+         correct:w.z,opts:distractors(w.z,WINES.filter(x=>x.z).map(x=>x.z)),info:full(w)};
+    } else if(t==='reverse'&&w.w){
+      q={type:'Umgekehrt',text:`Welcher ${w.c==='schnaps'?'Schnaps':'Wein'} ist von <b>${w.w}</b>?`,
+         correct:fullName(w),opts:distractors(fullName(w),same.filter(x=>x.w!==w.w).map(fullName)),info:full(w)};
+    }
+    if(q&&q.opts.length>=2){q.cat=w.c;q.options=shuffle([q.correct,...q.opts]);return q}
+  }
+  return null;
+}
+let cur=null,answered=false;
+function render(){
+  cur=makeQuestion();answered=false;$('fb').textContent='';$('answers').innerHTML='';
+  if(!cur){$('qText').textContent='Bitte mindestens eine Kategorie und einen Fragetyp wählen.';$('qCat').textContent='';$('qType').textContent='';return}
+  $('qCat').textContent=CATNAME[cur.cat];$('qCat').className='cat'+(cur.cat==='rot'?' rot':'');
+  $('qType').textContent=cur.type;$('qText').innerHTML=cur.text;
+  for(const o of cur.options){const b=document.createElement('button');b.textContent=o;b.onclick=()=>answer(b,o);$('answers').appendChild(b)}
+}
+function answer(btn,o){
+  if(answered)return;answered=true;
+  const ok=o===cur.correct;stats.t++;if(ok){stats.c++;stats.s++}else stats.s=0;saveStats();
+  for(const b of $('answers').children){b.disabled=true;if(b.textContent===cur.correct)b.classList.add('ok');else if(b===btn)b.classList.add('bad')}
+  $('fb').innerHTML=(ok?'<strong>Richtig.</strong> ':'<strong>Falsch.</strong> ')+cur.info;
+}
+$('nextBtn').onclick=render;
+document.querySelectorAll('#catChips input,#typeChips input').forEach(i=>i.onchange=render);
+document.addEventListener('keydown',e=>{if(e.key==='Enter'&&answered&&!$('view-quiz').hidden)render()});
+
+// ---- Karteikarten ----
+let order=shuffle(WINES),fi=0,shown=false;
+function renderFlash(){
+  const w=order[fi];shown=false;
+  $('fCat').textContent=CATNAME[w.c];$('fCat').className='cat'+(w.c==='rot'?' rot':'');
+  $('fName').textContent=w.c==='schnaps'?w.n:w.n+(w.y?' '+w.y:'');
+  $('fDetail').hidden=true;$('fHint').hidden=false;
+  const parts=[`<div>${w.w}${w.r?', '+w.r:''}</div>`];
+  if(w.a)parts.push(`<div>${w.a}%${w.bio?' · BIO':''}</div>`);
+  parts.push(`<div class="pr">${w.g?eur(w.g)+(w.c==='schnaps'?'':' / '):''}${w.b?eur(w.b):''}</div>`);
+  $('fDetail').innerHTML=parts.join('');
+}
+$('flashCard').onclick=()=>{shown=!shown;$('fDetail').hidden=!shown;$('fHint').hidden=shown};
+$('fNext').onclick=()=>{fi=(fi+1)%order.length;if(fi===0)order=shuffle(WINES);renderFlash()};
+$('fPrev').onclick=()=>{fi=(fi-1+order.length)%order.length;renderFlash()};
+renderFlash();
+
+// ---- Liste ----
+function renderList(){
+  const box=$('listBox');box.innerHTML='';const hide=$('hideDetails').checked;
+  for(const c of ['weiss','rot','schnaps']){
+    const h=document.createElement('div');h.className='sec';h.innerHTML=`<span>${CATNAME[c]}</span><span>${c==='schnaps'?'2 cl':'1/8 L / 75 cl'}</span>`;box.appendChild(h);
+    for(const w of WINES.filter(x=>x.c===c)){
+      const d=document.createElement('div');d.className='item'+(hide?' hide':'');
+      d.innerHTML=`<div class="n">${w.n}${w.y?`<small>${w.y}${w.a?' · '+w.a+'%':''}${w.bio?' · BIO':''}</small>`:''}</div>
+        <div class="p">${w.g?eur(w.g):''}${w.g&&w.b?' / ':''}${w.b?eur(w.b):''}</div>
+        <div class="w">${w.w}${w.r?', '+w.r:''}</div>`;
+      if(hide){d.querySelectorAll('.w,.p').forEach(el=>el.onclick=()=>el.style.filter='none')}
+      box.appendChild(d);
+    }
+  }
+}
+$('hideDetails').onchange=renderList;renderList();
+
+// ---- Tabs ----
+document.querySelectorAll('.tabs button').forEach(b=>b.onclick=()=>{
+  document.querySelectorAll('.tabs button').forEach(x=>x.setAttribute('aria-selected',x===b));
+  for(const v of ['quiz','flash','list'])$('view-'+v).hidden=(v!==b.dataset.tab);
+});
+render();
+</script>
+</body></html>
