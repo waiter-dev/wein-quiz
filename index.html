@@ -153,26 +153,26 @@ h1{font-family:var(--display);font-weight:600;letter-spacing:.14em;text-transfor
 // n = voller Name, s = Sorte/Grundname, z = Zusatzname (für „Wie heißt…“-Fragen), t = eindeutige Beschreibung für die Frage
 const WINES = [
  // Weiß & Rosé
- {c:'weiss',n:'Grüner Veltliner Schankwein',s:'Grüner Veltliner',t:'Hauswein (Grüner Veltliner, offen)',w:'Taubenschuss',r:null,y:null,a:null,g:6.1,b:null},
- {c:'weiss',n:'Grüner Veltliner „Am Berg“',s:'Grüner Veltliner',z:'„Am Berg“',t:'günstige Grüne Veltliner flaschenweise',w:'Bernhard Ott',r:'Wagram, Niederösterreich',y:2025,a:12.0,g:null,b:52.0},
- {c:'weiss',n:'Sauvignon Blanc Jakobi',s:'Sauvignon Blanc',z:'Jakobi',t:'offene (günstige) Sauvignon Blanc',w:'Gross & Gross',r:'Südsteiermark DAC',y:2025,a:12.5,g:8.2,b:47.0},
- {c:'weiss',n:'Wiener Gemischter Satz',s:'Wiener Gemischter Satz',t:'Wiener Gemischte Satz',w:'Stift Klosterneuburg',r:'Wien',y:2025,a:12.5,g:7.9,b:45.0},
- {c:'weiss',n:'Chardonnay',s:'Chardonnay',t:'Chardonnay',w:'Grassl',r:'Carnuntum DAC',y:2025,a:12.5,g:null,b:46.0,bio:1},
- {c:'weiss',n:'Riesling',s:'Riesling',t:'Riesling',w:'Loimer',r:'Langenlois, Kamptal DAC',y:2025,a:12.5,g:8.2,b:47.0,bio:1},
- {c:'weiss',n:'Pinot Grigio Merus',s:'Pinot Grigio',z:'Merus',t:'Pinot Grigio',w:'Tiefenbrunner',r:'Kurtatsch, Südtirol',y:2025,a:13.5,g:8.4,b:48.0},
- {c:'weiss',n:'Plachutta Rosé',s:'Rosé',t:'Plachutta Rosé',w:'Hannes Sabathi',r:'Gamlitz, Südsteiermark',y:2025,a:11.0,g:7.6,b:44.0},
- {c:'weiss',n:'Sauvignon Blanc Ried Grassnitzberg',s:'Sauvignon Blanc',z:'Ried Grassnitzberg',t:'teure Sauvignon Blanc (nur flaschenweise)',w:'Tement',r:'Langenlois, Kamptal DAC',y:2022,a:13.0,g:null,b:83.0,bio:1},
- {c:'weiss',n:'Grüner Veltliner Smaragd',s:'Grüner Veltliner',z:'Smaragd',t:'teure Grüne Veltliner (Smaragd, nur flaschenweise)',w:'Nikolaihof',r:'Ried im Weingebirge, Niederösterreich',y:2020,a:13.0,g:null,b:87.0,bio:1},
+ {c:'weiss',n:'Grüner Veltliner Schankwein',s:'Grüner Veltliner',t:'Hauswein (Grüner Veltliner, offen)',w:'Taubenschuss',l:'Niederösterreich',r:null,y:null,a:null,g:6.1,b:null},
+ {c:'weiss',n:'Grüner Veltliner „Am Berg“',s:'Grüner Veltliner',z:'„Am Berg“',t:'günstige Grüne Veltliner flaschenweise',w:'Bernhard Ott',l:'Niederösterreich',r:'Wagram, Niederösterreich',y:2025,a:12.0,g:null,b:52.0},
+ {c:'weiss',n:'Sauvignon Blanc Jakobi',s:'Sauvignon Blanc',z:'Jakobi',t:'offene (günstige) Sauvignon Blanc',w:'Gross & Gross',l:'Steiermark',r:'Südsteiermark DAC',y:2025,a:12.5,g:8.2,b:47.0},
+ {c:'weiss',n:'Wiener Gemischter Satz',s:'Wiener Gemischter Satz',t:'Wiener Gemischte Satz',w:'Stift Klosterneuburg',l:'Wien',r:'Wien',y:2025,a:12.5,g:7.9,b:45.0},
+ {c:'weiss',n:'Chardonnay',s:'Chardonnay',t:'Chardonnay',w:'Grassl',l:'Niederösterreich',r:'Carnuntum DAC',y:2025,a:12.5,g:null,b:46.0,bio:1},
+ {c:'weiss',n:'Riesling',s:'Riesling',t:'Riesling',w:'Loimer',l:'Niederösterreich',r:'Langenlois, Kamptal DAC',y:2025,a:12.5,g:8.2,b:47.0,bio:1},
+ {c:'weiss',n:'Pinot Grigio Merus',s:'Pinot Grigio',z:'Merus',t:'Pinot Grigio',w:'Tiefenbrunner',l:'Südtirol (Italien)',r:'Kurtatsch, Südtirol',y:2025,a:13.5,g:8.4,b:48.0},
+ {c:'weiss',n:'Plachutta Rosé',s:'Rosé',t:'Plachutta Rosé',w:'Hannes Sabathi',l:'Steiermark',r:'Gamlitz, Südsteiermark',y:2025,a:11.0,g:7.6,b:44.0},
+ {c:'weiss',n:'Sauvignon Blanc Ried Grassnitzberg',s:'Sauvignon Blanc',z:'Ried Grassnitzberg',t:'teure Sauvignon Blanc (nur flaschenweise)',w:'Tement',l:'Steiermark',r:'Langenlois, Kamptal DAC',y:2022,a:13.0,g:null,b:83.0,bio:1},
+ {c:'weiss',n:'Grüner Veltliner Smaragd',s:'Grüner Veltliner',z:'Smaragd',t:'teure Grüne Veltliner (Smaragd, nur flaschenweise)',w:'Nikolaihof',l:'Niederösterreich',r:'Ried im Weingebirge, Niederösterreich',y:2020,a:13.0,g:null,b:87.0,bio:1},
  // Rot
- {c:'rot',n:'Blaufränkisch Classic',s:'Blaufränkisch',z:'Classic',t:'Blaufränkisch',w:'Hans Igler',r:'Deutschkreutz, Mittelburgenland',y:2023,a:13.0,g:8.5,b:49.0},
- {c:'rot',n:'Zweigelt Kieselstein',s:'Zweigelt',z:'Kieselstein',t:'offene (günstige) Zweigelt',w:'Claus Preisinger',r:'Gols, Neusiedlersee',y:2023,a:12.5,g:8.7,b:50.0,bio:1},
- {c:'rot',n:'Pinot Noir',s:'Pinot Noir',t:'offene (günstige) Pinot Noir',w:'Reinisch',r:'Tattendorf, Thermenregion',y:2023,a:13.0,g:8.7,b:50.0,bio:1},
- {c:'rot',n:'Cabernet Sauvignon',s:'Cabernet Sauvignon',t:'Cabernet Sauvignon',w:'Martin Pasler',r:'Burgenland',y:2022,a:13.5,g:9.3,b:53.0,bio:1},
- {c:'rot',n:'Heideboden (BF, ME, ZW)',s:'Cuvée',z:'Heideboden',t:'Heideboden (Cuvée BF, ME, ZW)',w:'H&A Nittnaus',r:'Gols, Neusiedlersee',y:2023,a:13.5,g:9.1,b:52.0},
- {c:'rot',n:'Merlot',s:'Merlot',t:'Merlot',w:'G&R Triebaumer',r:'Rust, Leithaberg',y:2024,a:14.0,g:null,b:53.0,bio:1},
- {c:'rot',n:'Rarität Pannobile',s:'Rarität',z:'Pannobile',t:'Rarität Pannobile',w:'G&H Heinrich',r:'Neusiedlersee, Burgenland',y:2015,a:13.0,g:null,b:85.0},
- {c:'rot',n:'Pinot Noir Reserve',s:'Pinot Noir',z:'Reserve',t:'teure Pinot Noir (Reserve, nur flaschenweise)',w:'Juris',r:'Neusiedlersee, Burgenland',y:2020,a:14.0,g:null,b:87.0},
- {c:'rot',n:'Zweigelt Ried Hallebühl',s:'Zweigelt',z:'Ried Hallebühl',t:'teure Zweigelt (nur flaschenweise)',w:'Umathum',r:'Frauenkirchen, Burgenland',y:2020,a:12.5,g:null,b:95.0},
+ {c:'rot',n:'Blaufränkisch Classic',s:'Blaufränkisch',z:'Classic',t:'Blaufränkisch',w:'Hans Igler',l:'Burgenland',r:'Deutschkreutz, Mittelburgenland',y:2023,a:13.0,g:8.5,b:49.0},
+ {c:'rot',n:'Zweigelt Kieselstein',s:'Zweigelt',z:'Kieselstein',t:'offene (günstige) Zweigelt',w:'Claus Preisinger',l:'Burgenland',r:'Gols, Neusiedlersee',y:2023,a:12.5,g:8.7,b:50.0,bio:1},
+ {c:'rot',n:'Pinot Noir',s:'Pinot Noir',t:'offene (günstige) Pinot Noir',w:'Reinisch',l:'Niederösterreich',r:'Tattendorf, Thermenregion',y:2023,a:13.0,g:8.7,b:50.0,bio:1},
+ {c:'rot',n:'Cabernet Sauvignon',s:'Cabernet Sauvignon',t:'Cabernet Sauvignon',w:'Martin Pasler',l:'Burgenland',r:'Burgenland',y:2022,a:13.5,g:9.3,b:53.0,bio:1},
+ {c:'rot',n:'Heideboden (BF, ME, ZW)',s:'Cuvée',z:'Heideboden',t:'Heideboden (Cuvée BF, ME, ZW)',w:'H&A Nittnaus',l:'Burgenland',r:'Gols, Neusiedlersee',y:2023,a:13.5,g:9.1,b:52.0},
+ {c:'rot',n:'Merlot',s:'Merlot',t:'Merlot',w:'G&R Triebaumer',l:'Burgenland',r:'Rust, Leithaberg',y:2024,a:14.0,g:null,b:53.0,bio:1},
+ {c:'rot',n:'Rarität Pannobile',s:'Rarität',z:'Pannobile',t:'Rarität Pannobile',w:'G&H Heinrich',l:'Burgenland',r:'Neusiedlersee, Burgenland',y:2015,a:13.0,g:null,b:85.0},
+ {c:'rot',n:'Pinot Noir Reserve',s:'Pinot Noir',z:'Reserve',t:'teure Pinot Noir (Reserve, nur flaschenweise)',w:'Juris',l:'Burgenland',r:'Neusiedlersee, Burgenland',y:2020,a:14.0,g:null,b:87.0},
+ {c:'rot',n:'Zweigelt Ried Hallebühl',s:'Zweigelt',z:'Ried Hallebühl',t:'teure Zweigelt (nur flaschenweise)',w:'Umathum',l:'Burgenland',r:'Frauenkirchen, Burgenland',y:2020,a:12.5,g:null,b:95.0},
  // Schnäpse (g = Preis)
  {c:'schnaps',n:'Marille',w:'Wallner',g:6.9},
  {c:'schnaps',n:'Himbeere',w:'Wieser',g:7.4},
@@ -181,6 +181,7 @@ const WINES = [
  {c:'schnaps',n:'Haselnuss',w:'Freihof',g:6.9},
  {c:'schnaps',n:'Williamsbirne',w:'Jöbstl',g:7.3},
 ];
+const loc=w=>{if(!w.l)return w.r||'';if(!w.r)return w.l;return w.r.toLowerCase().includes(w.l.split(' ')[0].toLowerCase())?w.r:w.r+' ('+w.l+')'};
 const CATNAME={weiss:'Weiß & Rosé',rot:'Rot',schnaps:'Schnaps'};
 const eur=v=>v.toFixed(1).replace('.',',')+' €';
 const fullName=w=>w.c==='schnaps'?`${w.n} (${w.w})`:w.n+(w.y?' '+w.y:'');
@@ -209,7 +210,7 @@ function makeQuestion(){
   const pool=WINES.filter(w=>cats.includes(w.c));
   // Volle Antwortzeile: Name, Jahrgang, % – Winzer, Ort
   const full=w=>w.c==='schnaps'?`${w.n} – ${w.w}`:
-    `${w.n}${w.y?' '+w.y:''}${w.a?', '+String(w.a).replace('.',',')+' %':''}${w.bio?' BIO':''} – ${w.w}${w.r?', '+w.r:''}`;
+    `${w.n}${w.y?' '+w.y:''}${w.a?', '+String(w.a).replace('.',',')+' %':''}${w.bio?' BIO':''} – ${w.w}${loc(w)?', '+loc(w):''}`;
   for(let tries=0;tries<60;tries++){
     const w=pick(pool);const t=pick(types);
     const same=WINES.filter(x=>x.c===w.c&&x!==w);
@@ -260,7 +261,7 @@ function renderFlash(){
   $('fCat').textContent=CATNAME[w.c];$('fCat').className='cat'+(w.c==='rot'?' rot':'');
   $('fName').textContent=w.c==='schnaps'?w.n:w.n+(w.y?' '+w.y:'');
   $('fDetail').hidden=true;$('fHint').hidden=false;
-  const parts=[`<div>${w.w}${w.r?', '+w.r:''}</div>`];
+  const parts=[`<div>${w.w}${loc(w)?', '+loc(w):''}</div>`];
   if(w.a)parts.push(`<div>${w.a}%${w.bio?' · BIO':''}</div>`);
   parts.push(`<div class="pr">${w.g?eur(w.g)+(w.c==='schnaps'?'':' / '):''}${w.b?eur(w.b):''}</div>`);
   $('fDetail').innerHTML=parts.join('');
@@ -279,7 +280,7 @@ function renderList(){
       const d=document.createElement('div');d.className='item'+(hide?' hide':'');
       d.innerHTML=`<div class="n">${w.n}${w.y?`<small>${w.y}${w.a?' · '+w.a+'%':''}${w.bio?' · BIO':''}</small>`:''}</div>
         <div class="p">${w.g?eur(w.g):''}${w.g&&w.b?' / ':''}${w.b?eur(w.b):''}</div>
-        <div class="w">${w.w}${w.r?', '+w.r:''}</div>`;
+        <div class="w">${w.w}${loc(w)?', '+loc(w):''}</div>`;
       if(hide){d.querySelectorAll('.w,.p').forEach(el=>el.onclick=()=>el.style.filter='none')}
       box.appendChild(d);
     }
